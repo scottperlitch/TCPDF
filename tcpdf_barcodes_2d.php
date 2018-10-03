@@ -199,7 +199,7 @@ class TCPDF2DBarcode {
 			$imagick = false;
 			$png = imagecreate($width, $height);
 			$bgcol = imagecolorallocate($png, 255, 255, 255);
-			imagecolortransparent($png, $bgcol);
+			// imagecolortransparent($png, $bgcol);
 			$fgcol = imagecolorallocate($png, $color[0], $color[1], $color[2]);
 		} elseif (extension_loaded('imagick')) {
 			$imagick = true;
@@ -213,10 +213,12 @@ class TCPDF2DBarcode {
 			return false;
 		}
 		// print barcode elements
-		$y = 0;
+		$y = 10; // 10 for border, 0 no border
 		// for each row
+		$w -= 1; // 1 for border, 0 for no border
+		$h -= 1; // 1 for border, 0 for no border
 		for ($r = 0; $r < $this->barcode_array['num_rows']; ++$r) {
-			$x = 0;
+			$x = 10; // 10 for border, 0 no border
 			// for each column
 			for ($c = 0; $c < $this->barcode_array['num_cols']; ++$c) {
 				if ($this->barcode_array['bcode'][$r][$c] == 1) {
